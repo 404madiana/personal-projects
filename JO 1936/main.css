@@ -5,9 +5,7 @@
   padding: 0;
   box-sizing: border-box;
   background-repeat: no-repeat;
-  ::-webkit-scrollbar {
-    display: none;
-}
+  ::-webkit-scrollbar { display: none }
 }
 
 body, html {
@@ -17,18 +15,14 @@ body, html {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     max-width: 100%;
     overflow-x: hidden;
-    a {
-        color: #faa61a;
-    }
-    h {
-        margin-top: 10px;
-    }
+    a { color: #faa61a }
+    h { margin-top: 10px }
 }
 
 .topnav { /* https://www.w3schools.com/howto/howto_js_topnav.asp */ 
     width: 100%;
     top: 0;
-    background-color: #3b3b3be8;
+    background-color: #1b1b1be8;
     overflow: hidden;
     position: absolute;
     a {
@@ -40,10 +34,7 @@ body, html {
         text-decoration: none;
         font-size: 17px;
     }
-    a:hover {
-        background-color: rgba(255, 228, 196);
-        color: black;
-    }
+    a:hover { background-color: rgba(255, 228, 196); color: black }
 }
 header {
     margin-top: 6px;
@@ -57,38 +48,29 @@ header {
     h3 { font-size: 30px }
 }
 
-h1 {
-    font-size: 50px;
-}
+h1 { font-size: 50px }
 .slide-b, footer {
-    background-color: #3b3b3b;
+    background-color: #1b1b1b;
     padding: 50px;
     color: white;
     span { display: flex };
-    h1, h2, h3{ margin-bottom: 15px }
+    h1, h2, h3 { margin-bottom: 15px }
 }
 .slide-w {
     background-color: var(--background-color);
     padding: 50px;
     color: black;
     span { display: flex };
-    h1, h2, h3{ margin-bottom: 15px };
+    h1, h2, h3 { margin-bottom: 15px };
     .contenu { display: flex }
 }
-.flexbloc {
-    div {
-        max-width: 49%;
-        margin-right: 15px;
-    }
-}
+.flexbloc div { max-width: 49%; margin-right: 15px }
 
 .portrait {
     padding: 15px;
     max-width: 49%;
     height: 27rem;
-    h2 {
-        margin: -5px;
-    }
+    h2 { margin: -5px }
 }
 
 /* https://codepen.io/AbubakerSaeed/pen/rNNdvqz */
@@ -125,30 +107,17 @@ h1 {
 }
 .leni-bg { /* Un portrait en détails : Leni Riefenstahl */
     /* https://i.guim.co.uk/img/media/fbb96590e8d417c5db64eac627f47d12aacc6e73/0_0_1792_1355/master/1792.jpg?width=1900&dpr=1&s=none */
-    background: linear-gradient(to left, rgba(255, 228, 196, 0.1) 20%, #000), url("https://i.guim.co.uk/img/media/fbb96590e8d417c5db64eac627f47d12aacc6e73/0_0_1792_1355/master/1792.jpg?width=1900&dpr=1&s=none");
-    background-position: 30% 25%
+    background: linear-gradient(to left, rgba(213, 117, 0, 0.05) 20%, #000), url("https://i.guim.co.uk/img/media/fbb96590e8d417c5db64eac627f47d12aacc6e73/0_0_1792_1355/master/1792.jpg?width=1900&dpr=1&s=none"); background-position: 30% 25%
 }
 .willy-bg { /* Un portrait en détails : Willy Zielke */
     /* https://i.guim.co.uk/img/media/fbb96590e8d417c5db64eac627f47d12aacc6e73/0_0_1792_1355/master/1792.jpg?width=1900&dpr=1&s=none */
-    background: linear-gradient(to left, rgba(255, 228, 196, 0.1) 20%, rgba(255, 228, 196, 1)), url("https://www.filmmuseum-potsdam.de/media/de/6019_7305_Stahltier-Kopf15-wf.jpg");
-    background-size: 130%;
-    background-position: 0 10%;
+    background: linear-gradient(to left, rgba(255, 228, 196, 0.1) 20%, rgba(255, 228, 196, 1)), url("https://www.filmmuseum-potsdam.de/media/de/6019_7305_Stahltier-Kopf15-wf.jpg"); background-size: 130%; background-position: 0 10%;
 }
-.willy { /* portraits dynamiques : Zielke */
-    background: url('https://www.cinelounge.org/imgper/30202.png');
-    background-position: var(--bX) var(--bY);
-    background-size: cover;
-}
-.goebbels { /* portraits dynamiques : Goebbels */
-    width: 18rem;
-    height: 10rem;
-    background: url('https://cdn.gamma.app/guuak267tm9p8wt/cfe32e447b664e939a87640f7768ff77/original/17subSHEEHAN-superJumbo.jpg');
-    background-position: 0 0;
-    background-size: cover;
-}
-.goebbels-bg { background: linear-gradient(to left, #ffe4c4b8 20%, #ffe4c4b8), url(https://media.themoviedb.org/t/p/w500/mwph3piU9F9FFVQVtsp5QwMjdYY.jpg); background-size: cover; background-position: 50% 10%}
-.floue-bg { background: linear-gradient(to left, #00000082 20%, #00000082), url(https://argonnaute.parisnanterre.fr/images/6448e79a-032d-48bf-8c14-d13e47f65724_img-notice.jpg); background-size: 130%; background-position: 50% 15%}
-.herit-bg { background: linear-gradient(to left, #ffe4c48e 20%, #ffe4c48e), url(https://www.cinematheque.fr/cache/media/01-films/les-dieux-du-stade-1938-partie-2-fete-de-la-beaute/s,910-c0e70a.jpg); background-size: cover; background-position: 0 25%;}
+.willy { /* portraits dynamiques : Zielke */ background: url('https://www.cinelounge.org/imgper/30202.png'); background-position: var(--bX) var(--bY); background-size: cover }
+.goebbels { /* portraits dynamiques : Goebbels */ width: 18rem; height: 10rem; background: url('https://cdn.gamma.app/guuak267tm9p8wt/cfe32e447b664e939a87640f7768ff77/original/17subSHEEHAN-superJumbo.jpg'); background-position: 0 0; background-size: cover }
+.goebbels-bg { background: linear-gradient(to left, #ffe4c4b8 20%, #ffe4c4b8), url(https://media.themoviedb.org/t/p/w500/mwph3piU9F9FFVQVtsp5QwMjdYY.jpg); background-size: cover; background-position: 50% 10% }
+.floue-bg { background: linear-gradient(to left, #000000a0 20%, #000000a0), url(https://argonnaute.parisnanterre.fr/images/6448e79a-032d-48bf-8c14-d13e47f65724_img-notice.jpg); background-size: 130%; background-position: 50% 15% }
+.herit-bg { background: linear-gradient(to left, #ffe4c48e 20%, #ffe4c48e), url(https://www.cinematheque.fr/cache/media/01-films/les-dieux-du-stade-1938-partie-2-fete-de-la-beaute/s,910-c0e70a.jpg); background-size: cover; background-position: 0 25% }
 
 .container::before,
 .container::after { /* portraits dynamiques : bordures */
@@ -173,13 +142,21 @@ h1 {
     border-top-width: 0;
     border-right-width: 0;
 }
-
-.container--active {
-    transition: none;
-}
+.container--active { transition: none }
 
 .wrap:hover .container::before,
 .wrap:hover .container::after {
     width: calc(100% - 4rem);
     height: calc(100% - 4rem);
+}
+
+footer {
+    line-height: 120%;
+    a { text-decoration: none }
+    h4 { font-size: 22px; margin-bottom: 5px }
+    li {
+        list-style-type: square;
+        margin-left: 15px;
+        list-style-position: inside;
+    }
 }
