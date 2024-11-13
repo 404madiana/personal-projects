@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Blur bg</title>
+    <style>
+      div {
+        border: solid;
+        padding: 6vw;
+        position: relative;
+        color: white;
+        a {
+          color: #faa61a;
+        }
+      }
+
+      div:before {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        background: url('STHR hotelerie.gif') fixed center; /* https://codepen.io/gc-nomade/pen/MpvRGJ */
+        filter: blur(5px);
+        background-size: 100vw auto;
+        /* makup ? */
+        box-shadow: inset 0 0 0 50vw rgba(255, 255, 255, 0.2)
+      }
+
+      /* makup to center content */
+      html {
+        min-height: 100%;
+        display: flex;
+        background: url('STHR hotelerie.gif') fixed center;
+        background-size: 100vw auto
+      }
+
+      body {
+        margin: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div>blur my background<br>
+      <a href="https://stackoverflow.com/questions/42803390/how-to-make-background-of-div-blurred">
+        https://stackoverflow.com/questions/42803390/how-to-make-background-of-div-blurred
+      </a> 
+    </div>
+  </body>
+</html>
