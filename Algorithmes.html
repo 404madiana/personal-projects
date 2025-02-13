@@ -1,0 +1,1782 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Diana N.">
+    <title>Algos :3</title>
+    <style>
+        body {
+            background-color: #2f2d30;
+            color: white;
+            font-family: -apple-system, system-ui, "SDK_JP_Web-Heavy", "HYWenHei 85W"
+                /*police perso sry*/
+                , "Century Gothic", sans-serif;
+            margin: 25px;
+            --clr: #faa61a
+        }
+
+        code {
+            font-size: large
+        }
+
+        h2 {
+            color: var(--clr)
+        }
+
+        .notice {
+            --notice-clr: #2f81f7;
+            padding: 0.5rem 1rem;
+            margin-bottom: 16px;
+            border-left: 4px solid var(--notice-clr);
+            background-color: #232323;
+
+            .notice-title {
+                color: var(--notice-clr);
+                fill: #2f81f7;
+                font-size: 19px;
+            }
+        }
+
+        .date{
+            column-count: 4;
+            column-gap: 10px;
+
+            h2 {
+                width: auto
+            }
+        }
+        .date_sujets {
+            column-count: 3;
+            column-gap: 10px;
+            .exemple {
+                width: 420px;
+                display: inline-flexbox;
+            }
+        }
+
+        .fonction {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-auto-flow: row;
+            background-color: #232323a6;
+            --border-radius: 15px;
+            border-radius: var(--border-radius);
+            break-inside: avoid
+        }
+
+        .exemple {
+            grid-row: 1 / -1;
+            grid-column: 1;
+            margin: auto 15px 15px;
+            display: inline-block;
+            width: 305px;
+        }.exemple .sujet {
+                padding-left: 15px;
+                font-size: initial;
+                font-family: monospace;
+            }
+
+        /* TOOLTIP */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+
+            .tooltiptxt {
+                visibility: hidden;
+                background-color: #2f81f7EE;
+                color: black;
+                text-align: center;
+                border-radius: 6px;
+                padding: 5px 5px;
+
+                min-width: 100px;
+                max-width: 150px;
+                bottom: 110%;
+                left: 50%;
+                margin-left: -70%;
+                /* Use half of the width (120/2 = 60), to center the tooltip */
+
+                position: absolute;
+                z-index: 1;
+            }
+        }
+
+        /* TOOLTIP :hover */
+        .tooltip:hover {
+            background-color: rgba(48, 131, 248, 0.40)
+        }
+
+        .tooltip:hover .tooltiptxt {
+            visibility: visible
+        }
+
+        .copy {
+            width: fit-content;
+            cursor: context-menu
+        }
+
+        /* Code - espacement tab*/
+        .tab {
+            margin-left: 2em
+        }
+
+        .tab2 {
+            margin-left: 4em
+        }
+
+        .code {
+            font-size: 13.5px;
+            background-color: #191919;
+            padding: 15px 15px;
+            border-radius: var(--border-radius);
+            font-family: monospace;
+
+            .comments {
+                opacity: 50%;
+                font-style: italic;
+            }
+        }
+
+        .module {
+            color: var(--clr)
+        }
+        footer a:any-link { color: var(--clr);}
+        /* code clr */
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Codes Python pour le contrôle</h1>
+        <h3 style="color: var(--clr);">NSI avec M.Sangan</h3>
+        <p class="notice">
+            <span class="notice-title">
+                <svg width="16" height="16">
+                    <path
+                        d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.5 7.75A.75.75 0 0 1 7.25 7h1a.75.75 0 0 1 .75.75v2.75h.25a.75.75 0 0 1 0 1.5h-2a.75.75 0 0 1 0-1.5h.25v-2h-.25a.75.75 0 0 1-.75-.75ZM8 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z">
+                    </path>
+                </svg> <b>NOTICE</b>
+            </span><br><br>
+            Python est à la <b>case sensible</b> alors il est vulnérable aux fautes de syntaxe.<br>
+            Certains de ces codes ne marchent que sur EduPython :sadge: <br>
+            <br>
+            Certains des scripts importent les modules :<br>
+            - <code class="module">random</code> pour les évenements aléatoires<br>
+            - <code class="module">time</code> pour une lecture <i>moins agressive</i> sur le terminal <span
+                style="opacity: 40%;">(supprimable)</span>
+            <br><br>
+            N'hésitez pas à passer la souris sur certains scripts pour voir les <span
+                style="color: #2f81f7;">explications</span> :)
+        </p>
+    </header>
+    <main>
+        <h2>21/11/2023</h2>
+        <div class="date">
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="list_random" class="copy">Liste aléatoire</h3>
+                    <div class="code">
+                        <span class="tooltip">import random
+                            <span class="tooltiptxt">"On importe le module <b>random</b>."</span>
+                        </span><br><br>
+                        <span class="tooltip">L
+                            <span class="tooltiptxt" style="width: 170px;">
+                                <u>Attribut <b>L</b></u><br>
+                                Ici L est une <b>liste</b> (crochets contenant des valeurs)
+                            </span>
+                        </span> =
+                        [<span class="tooltip">random.
+                            <span class="tooltiptxt">"Depuis <b>random</b>,.."</span>
+                        </span><span class="tooltip">randint(1, 100)
+                            <span class="tooltiptxt"><b>randint</b> choisit au hasard des entiers entre 1 et 100</span>
+                        </span>
+                        <span class="tooltip">for
+                            <span class="tooltiptxt" style="margin-left: -55px;">
+                                <u>Boucle <b>for</b></u><br>
+                                "Pour [...] en [...]:~"
+                            </span></span> <span class="tooltip">i in range(10)
+                            <span class="tooltiptxt">randint choisit <b>10</b> nombres au hasard</span>
+                        </span>]
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="epel" class="copy">Épélation de caractères</h3>
+                    <div class="code">
+                        <span class="tooltip">import time<span class="tooltiptxt">"On importe le module
+                                <b>time</b>."</span></span><br>
+                        <span class="tooltip">txt<span class="tooltiptxt" style="width: 170px;">
+                                <u>Attribut <b>txt</b></u><br>
+                                Ici L est une <b>chaîne de caractères</b> (guillemets)</span>
+                        </span> = 'Exemple'<br>
+                        <br>
+                        <span class="tooltip">for i in<span class="tooltiptxt">"Pour chaque lettre
+                                dans..."</span></span> range(<span class="tooltip">len(txt)<span
+                                class="tooltiptxt"><u>taille de <b>txt</b></u><br>
+                                <b>len</b> s'adapte à toute nouvelle attribution de <b>txt</b></span></span>):<br>
+                        <span class="tab"><span class="tooltip">print<span class="tooltiptxt">affiche dans le
+                                    terminal</span></span>(<span class="tooltip">txt[i]<span class="tooltiptxt">
+                                    <u>"CETTE lettre depuis <b>txt</b>"</u>
+                                    <br>après l'affichage de la lettre, <b>i</b> bascule à la
+                                    suivante</span></span>)</span><br>
+                        <span class="tab"><span class="tooltip" style=".tooltip:hover {color: var(--clr);}">time.<span
+                                    class="tooltiptxt">"Depuis <b>time</b>,.."</span></span><span
+                                class="tooltip">sleep(1)<span class="tooltiptxt">le terminal respire pour <b>1</b>
+                                    sec.</span></span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="list_while" class="copy">Listing avec <b>WHILE</b></h3>
+                    <div class="code">
+                        import time<br>
+                        L = [2, 3, 1, 6, 5]<br>
+                        <span class="comments">
+                            # on prend ces chiffres comme <span style="color: #2f81f7;">exemples</span>
+                        </span><br><br>
+                        <span class="tooltip">i = 0
+                            <span class="tooltiptxt">mise en<br>place du<br>compteur de caractère</span>
+                        </span><br>
+                        <span class="tooltip">while i ﹤ len(L):
+                            <span class="tooltiptxt">"Tant que <b>i</b> est + petit que la <b>taille de L</b>.."</span>
+                        </span><br>
+                        <span class="tab">print(L[i])</span><br>
+                        <span class="tab">
+                            <span class="tooltip">i += 1
+                                <span class="tooltiptxt">bascule le compteur à la lettre suivante</span>
+                            </span>
+                        </span><br>
+                        <span class="tab">time.sleep(1)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="list_e" class="copy">Listing en élément</h3>
+                    <div class="code">
+                        import time<br>
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        for <span class="tooltip">e in L
+                            <span class="tooltiptxt" style="width: max-content">
+                                <u>Attribut <b>e</b></u><br>
+                                <b>e</b> aura la valeur de chaque élément dans la liste<br>
+                                <b>in L</b> analyse déjà la taille de <b>L</b>
+                            </span>
+                        </span>:<br>
+                        <span class="tab">print(e)</span><br>
+                        <span class="tab">time.sleep(1)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="enumerate" class="copy">Énumération</h3>
+                    <div class="code">
+                        import time<br>
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        for <span class="tooltip">i, e
+                            <span class="tooltiptxt">l'<b>i</b>ndex avec sa valeur correspondante</span>
+                        </span> in <span class="tooltip">enumerate(L)
+                            <span class="tooltiptxt">lit tous les indices et valeurs un par un</span>
+                        </span>:<br>
+                        <span class="tab">print(i, e)</span><br>
+                        <span class="tab">time.sleep(1)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="bool_inlist" class="copy">Appartenance dans la liste <b>(e)</b></h3>
+                    <div class="code">
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        <span class="tooltip">def appartient
+                            <span class="tooltiptxt"><b>fonction</b> qu'on l'appelle 'appartient()'</span>
+                        </span>(<span class="tooltip">elt
+                            <span class="tooltiptxt" style="width: 200px;">
+                                Attribut <b>elt</b> qu'on va définir directement sur le terminal<br>
+                                > appartient(<i style="color: #fff;">3</i>, L)<br>
+                                Ici, elt = <i style="color: #fff;">3</i>
+                            </span>
+                        </span>, <span class="tooltip">L
+                            <span class="tooltiptxt">"Cherche <i style="color: #fff;">3</i> dans cette
+                                <b>liste</b>."</span>
+                        </span>):<br>
+                        <span class="tab">for e in L:</span><br>
+                        <span class="tab2"><span class="tooltip">if e
+                                <span class="tooltiptxt">"Si cet élément(<b>e</b>) dans la liste.."</span>
+                            </span> <span class="tooltip">== elt:
+                                <span class="tooltiptxt">"..correspond(<b>=</b>) à celui qu'on
+                                    cherche(<b>elt</b>):"</span>
+                            </span></span><br>
+                        <span style="margin-left: 6em;"><span class="tooltip">return True
+                                <span class="tooltiptxt">"Répond <b>Vrai</b>."</span>
+                            </span></span><br>
+                        <span class="tab2"><span class="tooltip">return False
+                                <span class="tooltiptxt">"Sinon, répond <b>Faux</b>."</span>
+                            </span></span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="indice" class="copy">Recherche d'indice<br>d'une valeur dans<br>la liste</h3>
+                    <div class="code">
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def indice(elt, L):<br>
+                        <span class="tab">for i in range(len(L)):</span><br>
+                        <span class="tab2"><span class="tooltip">if L[i]<span class="tooltiptxt">"Si la valeur dans la
+                                    liste tirée par l'indice(<b>i</b>).."
+                                </span></span> == elt:</span><br>
+                        <span style="margin-left: 6em;"><span class="tooltip">return i<span class="tooltiptxt">"Affiche
+                                    l'<b>indice</b> de cette valeur."</span></span></span><br>
+                        <span class="tab2"><span class="tooltip">return None<span class="tooltiptxt"><b>None</b> pour
+                                    indiquer que cette valeur n'existe pas dans<br>la liste</span></span></span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="maxi" class="copy">Extremums : maximum</h3>
+                    <div class="code">
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def maximum(L):<br>
+                        <span class="tab">maxi = <span class="tooltip">L[0]<span class="tooltiptxt">première valeur de
+                                    la liste, valeur <b>initiale</b> pour comparer à la suite</span></span><br>
+                            <span class="tab">for i in range(len(L)):<br>
+                                <span class="tab2">if L[i] <span class="tooltip">> maxi<span class="tooltiptxt">"..est
+                                            supérieur à <b>maxi</b>:"</span></span>:</span><br>
+                                <span style="margin-left: 6em;"><span class="tooltip">maxi = L[i]<span
+                                            class="tooltiptxt">la valeur de l'indice compté prend la place<br>de
+                                            <b>maxi</b></span></span></span><br>
+                                <span class="tab"><span class="tooltip">return maxi<span class="tooltiptxt">Affiche le
+                                            maximum(<b>maxi</b>) de cette liste</span></span></span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="mini" class="copy">Extremums : minimum</h3>
+                    <div class="code">
+                        <i style="opacity: 50%;"># pratiquement pareil..</i><br>
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def minimum(L):<br>
+                        <span class="tab">mini = L[0]<br>
+                            <span class="tab">for i in range(len(L)):<br>
+                                <span class="tab2">if L[i] <span class="tooltip">
+                                        < mini<span class="tooltiptxt">"..est inférieur à <b>mini</b>:"
+                                    </span></span>:</span><br>
+                            <span style="margin-left: 6em;">mini = L[i]</span><br>
+                            <span class="tab">return mini</span>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <h2>23/11/2023</h2>
+        <span class="fonction">
+            <div class="exemple">
+                <h3 id="moyenne" class="copy">Moyenne d'une liste</h3>
+                <div class="code">
+                    L = [2, 3, 1, 6, 5]<br>
+                    <br>
+                    def moyenne(L):<br>
+                    <span class="tab">somme = 0<br>
+                        <span class="tab"><span class="tooltip">for i in range(len(L)):<br>
+                                <span class="tab">somme += L[i]<span class="tooltiptxt"><b>somme</b> est la
+                                        somme(<b>+=</b>) des valeurs de<br>la liste</span></span></span><br>
+                            <span class="tab">M = <span class="tooltip">somme / len(L)<span
+                                        class="tooltiptxt">L[0]+L[1]+...L[i]<br>────────────────<br>len(L)</span></span></span><br>
+                            <span class="tab">return M</span>
+                </div>
+            </div>
+        </span>
+        <h2>30/11/2023</h2>
+        <div class="date">
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="bool_double" class="copy"><b>BOOL</b>: doublon consécutif</h3>
+                    <div class="code">
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def double(L):<br>
+                        <span class="tab">for i in range(len(L) <span class="tooltip">- 1
+                                <span class="tooltiptxt"><b>-1</b> puisqu'on s'arrète à L[-1]</span></span>):
+                        </span><br>
+                        <span class="tab2"><span class="tooltip">if L[i] == L[i + 1]:
+                                <span class="tooltiptxt">"Si la valeur actuelle correspond à la suivante:"</span></span>
+                        </span><br>
+                        <span class="tab2"><span class="tab">return True</span></span><br>
+                        <span class="tab2">return False</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="multi" class="copy">Multiplication avec <b>+</b> et <b>-</b></h3>
+                    <div class="code">
+                        n1 = <span class="tooltip">input("n1 : ")
+                            <span class="tooltiptxt">permet d'insérer la valeur direct sur le terminal</span>
+                        </span><br>
+                        n2 = input("n2 : ")<br>
+                        <br>
+                        def multip(n1, n2):<br>
+                        <span class="tab"><span class="tooltip">
+                                if n1 < 0: <br>
+                                    <span class="tab">return -multip(-n1, n2)</span><br>
+                                    if n2 < 0: <br>
+                                        <span class="tab">return -multip(n1, -n2)</span>
+                                        <span class="tooltiptxt">pour le cas des nombres négatifs</span>
+                            </span></span><br><br>
+                        <span class="tab">multi = 0</span><br>
+                        <span class="tab">for _ in range(n2):</span><br>
+                        <span class="tab2">multi += n1</span><br>
+                        <span class="tab">return multi</span><br>
+                        <br>
+                        print(multip(n1, n2))
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="maxi_tab" class="copy">Extremums : maximum (<b>TAB</b>)</h3>
+                    <div class="code">
+                        <i style="opacity: 50%;"># mm moi jvois aucune différence..</i><br>
+                        tab = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def maxitab(tab):<br>
+                        <span class="tab">Tmax = tab[0]</span><br>
+                        <span class="tab">for e in tab:</span><br>
+                        <span class="tab2">if e > Tmax:</span><br>
+                        <span style="margin-left: 6em;">Tmax = e</span><br>
+                        <span class="tab">return Tmax</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="occurence" class="copy">Occurence dans la liste</h3>
+                    <div class="code">
+                        tab = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def occurence(elt, tab):<br>
+                        <span class="tab">occ = 0</span><br>
+                        <span class="tab">for e in tab:</span><br>
+                        <span class="tab2">if e == elt:</span><br>
+                        <span style="margin-left: 6em;">occ += 1</span><br>
+                        <span class="tab">return occ</span>
+                    </div>
+                </div>
+            </span>
+        </div>
+        <h2>17/09/2024</h2>
+        <div class="date">
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="moyenne_tab" class="copy">Moyenne d'une liste (<b>TAB</b>)</h3>
+                    <div class="code">
+                        tab = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def moyenne_tab(tab):<br>
+                        <span class="tab">somme = 0</span><br>
+                        <span class="tab"><span class="tooltip">for e in tab:<br>
+                                <span class="tooltiptxt">"Pour chaque valeur(<b>e</b>) dans la liste(<b>tab</b>)"</span>
+                            </span><br>
+                            <span class="tab2">somme += e</span><br>
+                            <span class="tab"><span class="tooltip">return somme // len(tab)
+                                    <span class="tooltiptxt">renvoie directement le resultat sans passer par la variable
+                                        M</span>
+                                </span></span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction" style="background-color: var(--clr);">
+                <div class="exemple">
+                    <h3 id="p_by_p" class="copy" style="color: black;"><b>SERIES</b> print par print<br>+ supplément
+                        random</h3>
+                    <div class="code">
+                        import time<br>
+                        from random import <span class="tooltip">randint
+                            <span class="tooltiptxt" style="max-width: 500px; width: 250px; left: -33%;">
+                                <u><b>randint()</b></u><br>
+                                fonction du module <b>random</b><br>
+                                si l'on importe seulement<br>
+                                le module, il faut alors
+                                <b>random.randint()</b>
+                            </span>
+                        </span><br>
+                        L = [randint(1, 100)for i in range(10)]<br>
+                        <span class="comments"># génération par flemme...</span><br><br>
+                        i = 0 <span class="comments"># i par i</span><br>
+                        for i in range(len(L)):<br>
+                        <span class="tab">print(L[i])</span><br>
+                        <span class="tab">time.sleep(1)</span><br>
+                        <br>
+                        for e in L: <span class="comments"># e par e</span><br>
+                        <span class="tab">print(e)</span><br>
+                        <span class="tab">time.sleep(1)</span><br>
+                        <br>
+                        i = 0 <span class="comments"># random lengh for i</span><br>
+                        while i < len(L):<br>
+                            <span class="tab">print(L[i])</span><br>
+                            <span class="tab">i += 1</span><br>
+                            <span class="tab">time.sleep(1)</span><br>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="bool_i" class="copy">Appartenance dans la liste <b>(L[i])</b> + indicateur d'indice</h3>
+                    <div class="code">
+                        L = [2, 3, 1, 6, 5]<br>
+                        <br>
+                        def appartient(elt, L)<br>
+                        <span class="tab">for i in range(len(L)):</span><br>
+                        <span class="tab2">if L[i] == elt:</span><br>
+                        <span style="margin-left: 6em;">return i</span><br>
+                        <span class="tab2">return None</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="multi_table" class="copy">Table de multiplication</h3>
+                    <div class="code">
+                        for n in range(1, 11): <span class="comments"># de 1 à 10, comme en CE2..</span><br>
+                        <span class="tab">for i in range(1, 11):
+                            <span class="tab2">print(<span class="tooltip">i,"x",n," = ",i*n<span
+                                        class="tooltiptxt">"{i} x {n} = {i*n}"<br>tout ça 100 fois
+                                        jcrois..</span></span>)</span>
+                        </span>
+                    </div>
+                </div>
+            </span><br>
+        </div>
+        <h2>19/09/2024</h2>
+        <div class="date">
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="couples" class="copy">Couples consécutifs</h3>
+                    <div class="code">
+                        L = [3, 1, 2, 5, 3, 4]<br>
+                        <br>
+                        def couples_consecutifs(L):<br>
+                        <span class="tab"><span class="tooltip">couples = []<span class="tooltiptxt"><i>placeholder</i>
+                                    pour la liste de couples trouvés</span></span><br>
+                            <span class="tab">for i in range(len(L) - 1):<br>
+                                <span class="tab2"><span class="tooltip">if L[i+1] == L[i] + 1
+                                        <span class="tooltiptxt">Comme en maths:<br>u<sub>n+1</sub> = u<sub>n</sub> +
+                                            1</span>
+                                    </span>:<br>
+                                    <span class="tab2">
+                                        <span class="tab">
+                                            <span class="tooltip">cpl1
+                                                <span class="tooltiptxt">u<sub>n</sub></span>
+                                            </span> = L[i]
+                                        </span>
+                                    </span><br>
+                                    <span class="tab2">
+                                        <span class="tab">
+                                            <span class="tooltip">cpl2
+                                                <span class="tooltiptxt">u<sub>n+1</sub></span>
+                                            </span> = L[i+1]
+                                        </span>
+                                    </span><br>
+                                    <span class="tab2">
+                                        <span class="tab">couples += <span class="tooltip">cpl1, cpl2
+                                                <span class="tooltiptxt" style="width: fit-content;">Le rendu sera en
+                                                    <b>tuple</b>:<br>[(cpl1, cpl2), (...)]</span>
+                                            </span></span>
+                                    </span><br>
+                                    <span class="tab">return couples</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="couples_append" class="copy">Couples consécutifs (<b>APPEND</b>)</h3>
+                    <div class="code">
+                        L = [3, 1, 2, 5, 3, 4]<br>
+                        <br>
+                        def couples_consecutifs(L):<br>
+                        <span class="tab">couples = []</span><br>
+                        <span class="tab">for i in range(len(L) - 1):</span><br>
+                        <span class="tab2">if L[i] == L[i+1]:</span><br>
+                        <span class="tab2"><span class="tab">couples<span class="tooltip">.append
+                                    <span class="tooltiptxt" style="width: max-content"><u>fonction
+                                            <b>append</b></u><br>comme "+=", marche aussi avec les caractères</span>
+                                </span>((tab[i], tab[i+1]))</span></span><br>
+                        <span class="tab2">return couples</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="maxi_i" class="copy">Extremums : maximum<br>+ indicateur d'indice</h3>
+                    <div class="code">
+                        L = [1, 5, 6, 9, 1, 2, 7, 9, 8]<br>
+                        <br>
+                        def maxi_i(L):<br>
+                        <span class="tab"><span class="tooltip">max_e, max_i = 0, 0
+                                <span class="tooltiptxt" style="margin-left: -55px;">raccourci<br>
+                                    max_e = 0<br>
+                                    max_i = 0<br></span>
+                            </span><br>
+                            <span class="tab">for i in range(len(L)):<br>
+                                <span class="tab2">if tab[i] > max_e:</span><br>
+                                <span style="margin-left: 6em;">max_e, max_i =
+                                    <span class="tooltip">tab[i]<span class="tooltiptxt"
+                                            style="width: max-content; margin-left: -60px;">max_e =
+                                            tab[i]</span></span>, <span class="tooltip">i<span class="tooltiptxt"
+                                            style="margin-left: -80px;">max_i = i</span></span></span><br>
+                                <span class="tab">return (max_e, max_i)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="bool_croissant" class="copy"><b>BOOL</b>: ordre croissant</h3>
+                    <div class="code">L = [0, 5, 8, 8, 9]<br><br>
+                        def croissant(L):<br>
+                        <span class="tab">for i in range(len(L) - 1):</span><br>
+                        <span class="tab2">if L[i] > L[i + 1]:</span><br>
+                        <span class="tab2">
+                            <span class="tab">return False</span>
+                        </span><br>
+                        <span class="tab2">return True</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="count_voyelle" class="copy">Compteur de voyelle</h3>
+                    <div class="code">
+                        def count_voyelle(mot):<br>
+                        <span class="tab">voyelle = <span class="tooltip">"aeiou"
+                                <span class="tooltiptxt"
+                                    style="margin-left: -140%; width: max-content;">['a','e','i','o','u']</span>
+                            </span></span><br>
+                        <span class="tab">count = 0</span><br>
+                        <span class="tab">for lettre in mot:</span><br>
+                        <span class="tab2">if lettre in voyelle:</span><br>
+                        <span class="tab2">
+                            <span class="tab">total += 1</span>
+                        </span><br>
+                        <span class="tab2">return total</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction">
+                <div class="exemple">
+                    <h3 id="bool_doublons" class="copy"><b>BOOL</b>: doublons dans la liste</h3>
+                    <div class="code">
+                        L = [2, 5, 7, 8, 7, 9]<br><br>
+                        def doublons(tab):<br>
+                        <span class="tab">verif = []</span><br>
+                        <span class="tab">for e in tab:</span><br>
+                        <span class="tab2">if e in verif:</span><br>
+                        <span class="tab2"><span class="tab">return True</span></span><br>
+                        <span class="tab2">else:</span><br>
+                        <span class="tab2"><span class="tab">verif.append(e)</span></span><br>
+                        <span class="tab">return False</span>
+                    </div>
+                </div>
+            </span><br>
+        </div>
+        <h2>4/10/2024 - Correction BNS 2023</h2>
+        <div class="date_sujets">
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_1" class="copy">Sujet 1<span class="sujet">verifie(tab)</span></h3>
+                    <div class="code">
+                        def verifie(tab):<br>
+                        <span class="tab">for i in range(1, len(tab)):</span><br>
+                        <span class="tab2">if tab[i] < tab[i-1]:</span> <br>
+                                <span class="tab2"><span class="tab">return False</span></span><br>
+                                <span class="tab">return True</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_2" class="copy">Sujet 2<span class="sujet">indices_maxi(tab)</span></h3>
+                    <div class="code">
+                        def indices_maxi(tab):<br>
+                        <span class="tab">val_max = tab[0]</span><br>
+                        <span class="tab">ind_max = []</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] > val_max:</span><br>
+                        <span class="tab2"><span class="tab">val_max = tab[i]</span></span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] == val_max:</span><br>
+                        <span class="tab2"><span class="tab">ind_max.append(i)</span></span><br>
+                        <span class="tab">return (val_max, ind_max)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_3" class="copy">Sujet 3<span class="sujet">moyenne(tab)</span></h3>
+                    <div class="code">
+                        def moyenne(tab):<br>
+                        <span class="tab">somme = 0</span><br>
+                        <span class="tab">coeffs = 0</span><br>
+                        <span class="tab">for couples in tab:</span><br>
+                        <span class="tab2">somme += couple[0] * couple[1]</span><br>
+                        <span class="tab2">coeffs += couple[1]</span><br>
+                        <span class="tab">if coeffs == 0:</span><br>
+                        <span class="tab2">return None</span><br>
+                        <span class="tab">return somme / coeffs</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_4" class="copy">Sujet 4<span class="sujet">a_doublon(lst)</span></h3>
+                    <div class="code">
+                        def a_doublon(lst):<br>
+                        <span class="tab">for i in range(len(lst)-1):</span><br>
+                        <span class="tab2">if lst[i] == lst[i+1]:</span><br>
+                        <span class="tab2"><span class="tab">return True</span></span><br>
+                        <span class="tab">return False</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_5" class="copy">Sujet 5<span class="sujet">paire_6(tab)</span></h3>
+                    <div class="code">
+                        from random import randint<br>
+                        <br>
+                        def lancer(n):<br>
+                        <span class="tab">return [randint(1,6) for _ in range(n)]</span><br>
+                        <br>
+                        def paire_6(tab):<br>
+                        <span class="tab">nb = 0</span><br>
+                        <span class="tab">for elt in tab:</span><br>
+                        <span class="tab2">if elt == 6:</span><br>
+                        <span class="tab2"><span class="tab">nb += 1</span></span><br>
+                        <span class="tab">if nb >= 2:</span><br>
+                        <span class="tab2">return True</span><br>
+                        <span class="tab">else:</span><br>
+                        <span class="tab2">return False</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_6" class="copy">Sujet 6<span class="sujet">recherche(tab, n)</span></h3>
+                    <div class="code">
+                        def recherche(tab, n):<br>
+                        <span class="tab">indice_solution = len(tab)</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] == n:</span><br>
+                        <span class="tab2"><span class="tab">indice_solution = i</span></span><br>
+                        <span class="tab">return indice_solution</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_7" class="copy">Sujet 7<span class="sujet">fusion(tab1, tab2)</span></h3>
+                    <div class="code">
+                        def fusion(tab1, tab2):<br>
+                        <span class="tab">tab_fusion = []</span><br>
+                        <span class="tab">i1 = 0</span><br>
+                        <span class="tab">i2 = 0</span><br>
+                        <span class="tab">while i1 < len(tab1) and i2 < len(tab2):</span> <br>
+                                <span class="tab2">if tab1[i1] < tab2[i2]:</span> <br>
+                                        <span class="tab3">tab_fusion.append(tab1[i1])</span><br>
+                                        <span class="tab3">i1 += 1</span><br>
+                                        <span class="tab2">else:</span><br>
+                                        <span class="tab3">tab_fusion.append(tab2[i2])</span><br>
+                                        <span class="tab3">i2 += 1</span><br>
+                                        <span class="tab">if i1 == len(tab1):</span><br>
+                                        <span class="tab2">while i2 < len(tab2):</span> <br>
+                                                <span class="tab3">tab_fusion.append(tab2[i2])</span><br>
+                                                <span class="tab3">i2 += 1</span><br>
+                                                <span class="tab">else:</span><br>
+                                                <span class="tab2">while i1 < len(tab1):</span> <br>
+                                                        <span class="tab3">tab_fusion.append(tab1[i1])</span><br>
+                                                        <span class="tab3">i1 += 1</span><br>
+                                                        <span class="tab">return tab_fusion</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_8" class="copy">Sujet 8<span class="sujet">max_dico(dico)</span></h3>
+                    <div class="code">
+                        def max_dico(dico):<br>
+                        <span class="tab">cle_max = ''</span><br>
+                        <span class="tab">val_max = 0</span><br>
+                        <span class="tab">for cle in dico:</span><br>
+                        <span class="tab2">if dico[cle] > val_max:</span><br>
+                        <span class="tab3">val_max = dico[cle]</span><br>
+                        <span class="tab3">cle_max = cle</span><br>
+                        <span class="tab">return (cle_max, val_max)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_9" class="copy">Sujet 9<span class="sujet">multiplication(n1, n2)</span></h3>
+                    <div class="code">
+                        def multiplication(n1, n2):<br>
+                        <span class="tab">if n1 < 0:</span> <br>
+                                <span class="tab2">return -multiplication(-n1, n2)</span><br>
+                                <span class="tab">if n2 < 0:</span> <br>
+                                        <span class="tab2">return -multiplication(n1, -n2)</span><br>
+                                        <span class="tab">resultat = 0</span><br>
+                                        <span class="tab">for _ in range(n2):</span><br>
+                                        <span class="tab2">resultat += n1</span><br>
+                                        <span class="tab">return resultat</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_10" class="copy">Sujet 10<span class="sujet">maxliste(tab)</span></h3>
+                    <div class="code">
+                        def maxliste(tab):<br>
+                        <span class="tab">maximum = tab[0]</span><br>
+                        <span class="tab">for element in tab:</span><br>
+                        <span class="tab2">if element > maximum:</span><br>
+                        <span class="tab3">maximum = element</span><br>
+                        <span class="tab">return maximum</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_11" class="copy">Sujet 11<span class="sujet">convertir(tab)</span></h3>
+                    <div class="code">
+                        def convertir(tab):<br>
+                        <span class="tab">puissance = 0</span><br>
+                        <span class="tab">total = 0</span><br>
+                        <span class="tab">for i in range(len(tab)-1, -1, -1):</span><br>
+                        <span class="tab2">total += tab[i]*(2**puissance)</span><br>
+                        <span class="tab2">puissance += 1</span><br>
+                        <span class="tab">return total</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_12" class="copy">Sujet 12<span class="sujet">ajoute(cle, a)</span></h3>
+                    <div class="code">
+                        def ajoute(cle, a):<br>
+                        <span class="tab">if a is None:</span><br>
+                        <span class="tab2">a = ABR(None, cle, None)</span><br>
+                        <span class="tab">elif cle > a.cle:</span><br>
+                        <span class="tab2">a.droit = ajoute(cle, a.droit)</span><br>
+                        <span class="tab">elif cle < a.cle:</span> <br>
+                                <span class="tab2">a.gauche = ajoute(cle, a.gauche)</span><br>
+                                <span class="tab">return a</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_13" class="copy">Sujet 13<span class="sujet">recherche(a, tab)</span></h3>
+                    <div class="code">
+                        def recherche(a, tab):<br>
+                        <span class="tab">nb = 0</span><br>
+                        <span class="tab">for element in tab:</span><br>
+                        <span class="tab2">if element == a:</span><br>
+                        <span class="tab3">nb += 1</span><br>
+                        <span class="tab">return nb</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_14" class="copy">Sujet 14<span class="sujet">recherche(elt, tab)</span></h3>
+                    <div class="code">
+                        def recherche(elt, tab):<br>
+                        <span class="tab">assert tab != [], "le tableau est vide"</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] == elt:</span><br>
+                        <span class="tab3">return i</span><br>
+                        <span class="tab">return -1</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_15" class="copy">Sujet 15<span class="sujet">mini(releve, date)</span></h3>
+                    <div class="code">
+                        t_moy = [14.9, 13.3, 13.1, 12.5, 13.0, 13.6, 13.7]<br>
+                        annees = [2013, 2014, 2015, 2016, 2017, 2018, 2019]<br>
+                        <br>
+                        def mini(releve, date):<br>
+                        <span class="tab">temp_mini = releve[0]</span><br>
+                        <span class="tab">date_mini = date[0]</span><br>
+                        <span class="tab">for i in range(len(releve)):</span><br>
+                        <span class="tab2">if releve[i] < temp_mini:</span> <br>
+                                <span class="tab3">temp_mini = releve[i]</span><br>
+                                <span class="tab3">date_mini = date[i]</span><br>
+                                <span class="tab">return temp_mini, date_mini</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_16" class="copy">Sujet 16<span class="sujet">recherche_indices_classement(elt,
+                            tab)</span></h3>
+                    <div class="code">
+                        def recherche_indices_classement(elt, tab):<br>
+                        <span class="tab">ind_inf = []</span><br>
+                        <span class="tab">ind_egal = []</span><br>
+                        <span class="tab">ind_sup = []</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] < elt:</span><br>
+                            <span class="tab3">ind_inf.append(i)</span><br>
+                            <span class="tab2">elif tab[i] > elt:</span><br>
+                            <span class="tab3">ind_sup.append(i)</span><br>
+                            <span class="tab2">else:</span><br>
+                            <span class="tab3">ind_egal.append(i)</span><br>
+                            <span class="tab">return (ind_inf, ind_egal, ind_sup)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_17" class="copy">Sujet 17<span class="sujet">moyenne(liste_notes)</span></h3>
+                    <div class="code">
+                        def moyenne(liste_notes):<br>
+                        <span class="tab">somme_notes = 0</span><br>
+                        <span class="tab">somme_coeffs = 0</span><br>
+                        <span class="tab">for devoir in liste_notes:</span><br>
+                        <span class="tab2">note = devoir[0]</span><br>
+                        <span class="tab2">coeff = devoir[1]</span><br>
+                        <span class="tab2">somme_notes += note * coeff</span><br>
+                        <span class="tab2">somme_coeffs += coeff</span><br>
+                        <span class="tab">return somme_notes / somme_coeffs</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_18" class="copy">Sujet 18<span class="sujet">max_et_indice(tab)</span></h3>
+                    <div class="code">
+                        def max_et_indice(tab):<br>
+                        <span class="tab">assert tab != [], 'le tableau est vide'</span><br>
+                        <span class="tab">val_max = tab[0]</span><br>
+                        <span class="tab">ind_max = 0</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] > val_max:</span><br>
+                        <span class="tab3">val_max = tab[i]</span><br>
+                        <span class="tab3">ind_max = i</span><br>
+                        <span class="tab">return (val_max, ind_max)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_19" class="copy">Sujet 19<span class="sujet">recherche(tab, n)</span></h3>
+                    <div class="code">
+                        def recherche(tab, n):<br>
+                        <span class="tab">ind_debut = 0</span><br>
+                        <span class="tab">ind_fin = len(tab) - 1</span><br>
+                        <span class="tab">while ind_debut <= ind_fin:</span> <br>
+                                <span class="tab2">ind_milieu = (ind_debut + ind_fin) // 2</span><br>
+                                <span class="tab2">if tab[ind_milieu] == n:</span><br>
+                                <span class="tab3">return ind_milieu</span><br>
+                                <span class="tab2">elif tab[ind_milieu] < n:</span> <br>
+                                        <span class="tab3">ind_debut = ind_milieu + 1</span><br>
+                                        <span class="tab2">else:</span><br>
+                                        <span class="tab3">ind_fin = ind_milieu - 1</span><br>
+                                        <span class="tab">return -1</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_20" class="copy">Sujet 20<span class="sujet">ajoute_dictionnaires(d1, d2)</span></h3>
+                    <div class="code">
+                        def ajoute_dictionnaires(d1, d2):<br>
+                        <span class="tab">for cle in d2:</span><br>
+                        <span class="tab2">if cle in d1:</span><br>
+                        <span class="tab3">d1[cle] += d2[cle]</span><br>
+                        <span class="tab2">else:</span><br>
+                        <span class="tab3">d1[cle] = d2[cle]</span><br>
+                        <span class="tab">return d1</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_21" class="copy">Sujet 21<span class="sujet">delta(tab)</span></h3>
+                    <div class="code">
+                        def delta(tab):<br>
+                        <span class="tab">diff = [tab[0]]</span><br>
+                        <span class="tab">for i in range(1, len(tab)):</span><br>
+                        <span class="tab2">diff.append(tab[i] - tab[i-1])</span><br>
+                        <span class="tab">return diff</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_22" class="copy">Sujet 22<span class="sujet">liste_puissances(a, n)</span></h3>
+                    <div class="code">
+                        def liste_puissances(a, n):<br>
+                        <span class="tab">puissances = [a]</span><br>
+                        <span class="tab">for i in range(n-1):</span><br>
+                        <span class="tab2">puissances.append(puissances[-1] * a)</span><br>
+                        <span class="tab">return puissances</span><br>
+                        <br>
+                        def liste_puissances_borne(a, borne):<br>
+                        <span class="tab">lst = []</span><br>
+                        <span class="tab">val = a</span><br>
+                        <span class="tab">while val < borne:</span> <br>
+                                <span class="tab2">lst.append(val)</span><br>
+                                <span class="tab2">val = val * a</span><br>
+                                <span class="tab">return lst</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_23" class="copy">Sujet 23<span class="sujet">selection_enclos(table_animaux,
+                            num_enclos)</span></h3>
+                    <div class="code">
+                        def selection_enclos(table_animaux, num_enclos):<br>
+                        <span class="tab">table = []</span><br>
+                        <span class="tab">for animal in table_animaux:</span><br>
+                        <span class="tab2">if animal['enclos'] == num_enclos:</span><br>
+                        <span class="tab3">table.append(animal)</span><br>
+                        <span class="tab">return table</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_24" class="copy">Sujet 24<span class="sujet">nbr_occurrences(chaine)</span></h3>
+                    <div class="code">
+                        def nbr_occurrences(chaine):<br>
+                        <span class="tab">nb_occ = {}</span><br>
+                        <span class="tab">for caractere in chaine:</span><br>
+                        <span class="tab2">if caractere in nb_occ:</span><br>
+                        <span class="tab3">nb_occ[caractere] += 1</span><br>
+                        <span class="tab2">else:</span><br>
+                        <span class="tab3">nb_occ[caractere] = 1</span><br>
+                        <span class="tab">return nb_occ</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_25" class="copy">Sujet 25<span class="sujet">enumere(L)</span></h3>
+                    <div class="code">
+                        def enumere(L):<br>
+                        <span class="tab">d = {}</span><br>
+                        <span class="tab">for i in range(len(L)):</span><br>
+                        <span class="tab2">if L[i] in d:</span><br>
+                        <span class="tab3">d[L[i]].append(i)</span><br>
+                        <span class="tab2">else:</span><br>
+                        <span class="tab3">d[L[i]] = [i]</span><br>
+                        <span class="tab">return d</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_26" class="copy">Sujet 26<span class="sujet">multiplication(n1, n2)</span></h3>
+                    <div class="code">
+                        def multiplication(n1, n2):<br>
+                        <span class="tab">if n1 < 0:</span> <br>
+                                <span class="tab2">return -multiplication(-n1, n2)</span><br>
+                                <span class="tab">if n2 < 0:</span> <br>
+                                        <span class="tab2">return -multiplication(n1, -n2)</span><br>
+                                        <span class="tab">resultat = 0</span><br>
+                                        <span class="tab">for _ in range(n2):</span><br>
+                                        <span class="tab2">resultat += n1</span><br>
+                                        <span class="tab">return resultat</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_27" class="copy">Sujet 27<span class="sujet">recherche_min(tab)</span></h3>
+                    <div class="code">
+                        def recherche_min(tab):<br>
+                        <span class="tab">indice_min = 0</span><br>
+                        <span class="tab">for i in range(len(tab)):</span><br>
+                        <span class="tab2">if tab[i] < tab[indice_min]:</span> <br>
+                                <span class="tab3">indice_min = i</span><br>
+                                <span class="tab">return indice_min</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_28" class="copy">Sujet 28<span class="sujet">moyenne(tab)</span></h3>
+                    <div class="code">
+                        def moyenne(tab):<br>
+                        <span class="tab">somme = 0</span><br>
+                        <span class="tab">for elt in tab:</span><br>
+                        <span class="tab2">somme += elt</span><br>
+                        <span class="tab">return somme / len(tab)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_29" class="copy">Sujet 29<span class="sujet">taille(a)</span></h3>
+                    <div class="code">
+                        def taille(a):<br>
+                        <span class="tab">if a is None:</span><br>
+                        <span class="tab2">return 0</span><br>
+                        <span class="tab">else:</span><br>
+                        <span class="tab2">return 1 + taille(a.fg) + taille(a.fd)</span><br>
+                        <br>
+                        def hauteur(a):<br>
+                        <span class="tab">if a is None:</span><br>
+                        <span class="tab2">return 0</span><br>
+                        <span class="tab">else:</span><br>
+                        <span class="tab2">return 1 + max(hauteur(a.fg), hauteur(a.fd))</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_30" class="copy">Sujet 30<span class="sujet">moyenne(tab)</span></h3>
+                    <div class="code">
+                        def moyenne(tab):<br>
+                        <span class="tab">somme = 0</span><br>
+                        <span class="tab">for val in tab:</span><br>
+                        <span class="tab2">somme += val</span><br>
+                        <span class="tab">return somme / len(tab)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_31" class="copy">Sujet 31<span class="sujet">nb_repetitions(elt, tab)</span></h3>
+                    <div class="code">
+                        def nb_repetitions(elt, tab):<br>
+                        <span class="tab">nb = 0</span><br>
+                        <span class="tab">for element in tab:</span><br>
+                        <span class="tab2">if element == elt:</span><br>
+                        <span class="tab3">nb += 1</span><br>
+                        <span class="tab">return nb</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_32" class="copy">Sujet 32<span class="sujet">min_et_max(tab)</span></h3>
+                    <div class="code">
+                        def min_et_max(tab):<br>
+                        <span class="tab">d = {}</span><br>
+                        <span class="tab">d['min'] = tab[0]</span><br>
+                        <span class="tab">d['max'] = tab[0]</span><br>
+                        <span class="tab">for val in tab:</span><br>
+                        <span class="tab2">if val < d['min']:</span> <br>
+                                <span class="tab3">d['min'] = val</span><br>
+                                <span class="tab2">if val > d['max']:</span><br>
+                                <span class="tab3">d['max'] = val</span><br>
+                                <span class="tab">return d</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_33" class="copy">Sujet 33<span class="sujet">taille(arbre, lettre)</span></h3>
+                    <div class="code">
+                        a = {'F':['B','G'], 'B':['A','D'], 'A':['',''], 'D':['C','E'], 'C':['',''], 'E':['',''],
+                        'G':['','I'], 'I':['','H'], 'H':['','']}<br>
+                        <br>
+                        def taille(arbre, lettre):<br>
+                        <span class="tab">fils_gauche = arbre[lettre][0]</span><br>
+                        <span class="tab">fils_droit = arbre[lettre][1]</span><br>
+                        <br>
+                        <span class="tab">if fils_gauche != '' and fils_droit != '':</span><br>
+                        <span class="tab2">return 1 + taille(arbre, fils_gauche) + taille(arbre, fils_droit)</span><br>
+                        <br>
+                        <span class="tab">if fils_gauche != '' and fils_droit == '':</span><br>
+                        <span class="tab2">return 1 + taille(arbre, fils_gauche)</span><br>
+                        <br>
+                        <span class="tab">if fils_gauche == '' and fils_droit != '':</span><br>
+                        <span class="tab2">return 1 + taille(arbre, fils_droit)</span><br>
+                        <br>
+                        <span class="tab">else:</span><br>
+                        <span class="tab2">return 1</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_34" class="copy">Sujet 34<span class="sujet">moyenne(tab)</span></h3>
+                    <div class="code">
+                        def moyenne(tab):<br>
+                        <span class="tab">if tab == []:</span><br>
+                        <span class="tab2">print('Le tableau donné est vide')</span><br>
+                        <span class="tab2">return None</span><br>
+                        <span class="tab">else:</span><br>
+                        <span class="tab2">somme = 0</span><br>
+                        <span class="tab2">for elt in tab:</span><br>
+                        <span class="tab3">somme += elt</span><br>
+                        <span class="tab2">return somme / len(tab)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_35" class="copy">Sujet 35<span class="sujet">ou_exclusif(tab1, tab2)</span></h3>
+                    <div class="code">
+                        def ou_exclusif(tab1, tab2):<br>
+                        <span class="tab">resultat = []</span><br>
+                        <span class="tab">taille = len(tab1)</span><br>
+                        <span class="tab">for i in range(taille):</span><br>
+                        <span class="tab2">resultat.append(tab1[i] ^ tab2[i])</span><br>
+                        <span class="tab">return resultat</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_36" class="copy">Sujet 36<span class="sujet">couples_consecutifs(tab)</span></h3>
+                    <div class="code">
+                        def couples_consecutifs(tab):<br>
+                        <span class="tab">solution = []</span><br>
+                        <span class="tab">for i in range(len(tab)-1):</span><br>
+                        <span class="tab2">if tab[i] + 1 == tab[i+1]:</span><br>
+                        <span class="tab3">solution.append((tab[i], tab[i+1]))</span><br>
+                        <span class="tab">return solution</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_37" class="copy">Sujet 37<span class="sujet">recherche(elt, tab)</span></h3>
+                    <div class="code">
+                        def recherche(elt, tab):<br>
+                        <span class="tab">for i in range(len(tab)-1, -1, -1):</span><br>
+                        <span class="tab2">if tab[i] == elt:</span><br>
+                        <span class="tab3">return i</span><br>
+                        <span class="tab">return -1</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_38" class="copy">Sujet 38<span class="sujet">correspond(mot, mot_a_trous)</span></h3>
+                    <div class="code">
+                        def correspond(mot, mot_a_trous):<br>
+                        <span class="tab">if len(mot) != len(mot_a_trous):</span><br>
+                        <span class="tab2">return False</span><br>
+                        <span class="tab">for i in range(len(mot)):</span><br>
+                        <span class="tab2">if mot[i] != mot_a_trous[i] and mot_a_trous[i] != '*':</span><br>
+                        <span class="tab3">return False</span><br>
+                        <span class="tab">return True</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_39" class="copy">Sujet 39<span class="sujet">fibonacci(n)</span></h3>
+                    <div class="code">
+                        def fibonacci(n):<br>
+                        <span class="tab">if n == 1 :</span><br>
+                        <span class="tab2">return 1</span><br>
+                        <span class="tab">elif n == 1 :</span><br>
+                        <span class="tab2">return 1</span><br>
+                        <span class="tab">else :</span><br>
+                        <span class="tab2">return fibonacci(n-1) + fibonacci(n-2)</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_40" class="copy">Sujet 40<span class="sujet">nombre_de_mots(phrase)</span></h3>
+                    <div class="code">
+                        def nombre_de_mots(phrase):<br>
+                        <span class="tab">nb_mots = 0</span><br>
+                        <span class="tab">for caractere in phrase:</span><br>
+                        <span class="tab2">if caractere == ' ' or caractere == '.':</span><br>
+                        <span class="tab3">nb_mots += 1</span><br>
+                        <span class="tab">return nb_mots</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_41" class="copy">Sujet 41<span class="sujet">recherche(caractere, chaine)</span></h3>
+                    <div class="code">
+                        def recherche(caractere, chaine):<br>
+                        <span class="tab">somme = 0</span><br>
+                        <span class="tab">for lettre in chaine:</span><br>
+                        <span class="tab2">if lettre == caractere:</span><br>
+                        <span class="tab3">somme += 1</span><br>
+                        <span class="tab">return somme</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_42" class="copy">Sujet 42<span class="sujet">tri_selection(tab)</span></h3>
+                    <div class="code">
+                        def tri_selection(tab):<br>
+                        <span class="tab">for i in range(len(tab)-1):</span><br>
+                        <span class="tab2">indice_min = i</span><br>
+                        <span class="tab2">for j in range(i+1, len(tab)):</span><br>
+                        <span class="tab3">if tab[j] < tab[indice_min]:</span> <br>
+                                <span class="tab4">indice_min = j</span><br>
+                                <span class="tab2">tab[i], tab[indice_min] = tab[indice_min], tab[i]</span><br>
+                                <span class="tab">return tab</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_43" class="copy">Sujet 43<span class="sujet">ecriture_binaire_entier_positif(n)</span>
+                    </h3>
+                    <div class="code">
+                        def ecriture_binaire_entier_positif(n):<br>
+                        <span class="tab">if n == 0:</span><br>
+                        <span class="tab2">return [0]</span><br>
+                        <span class="tab">b = []</span><br>
+                        <span class="tab">while n != 0:</span><br>
+                        <span class="tab2">b.append(n % 2)</span><br>
+                        <span class="tab2">n = n // 2</span><br>
+                        <span class="tab">b.reverse()</span><br>
+                        <span class="tab">return b</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_44" class="copy">Sujet 44<span class="sujet">renverse(mot)</span></h3>
+                    <div class="code">
+                        def renverse(mot):<br>
+                        <span class="tab">sol = ''</span><br>
+                        <span class="tab">for lettre in mot:</span><br>
+                        <span class="tab2">sol = lettre + sol</span><br>
+                        <span class="tab">return sol</span>
+                    </div>
+                </div>
+            </span><br>
+            <span class="fonction sujet">
+                <div class="exemple">
+                    <h3 id="sujet_45" class="copy">Sujet 45<span class="sujet">rangement_valeurs(notes_eval)</span></h3>
+                    <div class="code">
+                        def rangement_valeurs(notes_eval):<br>
+                        <span class="tab">lst = [0]*11</span><br>
+                        <span class="tab">for note in notes_eval:</span><br>
+                        <span class="tab2">lst[note] += 1</span><br>
+                        <span class="tab">return lst</span><br>
+                        <br>
+                        def notes_triees(effectifs_notes):<br>
+                        <span class="tab">triees = []</span><br>
+                        <span class="tab">for i in range(11):</span><br>
+                        <span class="tab2">if effectifs_notes[i] != 0:</span><br>
+                        <span class="tab3">for _ in range(effectifs_notes[i]):</span><br>
+                        <span class="tab4">triees.append(i)</span><br>
+                        <span class="tab">return triees</span>
+                    </div>
+                </div>
+            </span><br>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 par iana | <a href="https://www.instagram.com/404.mad_iana/" target="_blank">Instagram</a> | <a href="https://www.tiktok.com/@mad_iana" target="_blank">TikTok</a></p>
+    </footer>
+    <script>
+        //the copy function
+        let createCopy = function (textToCopy, triggerElementId, callback = null) {
+            //add event listner to elementtrigger
+            let trigger = document.getElementById(triggerElementId);
+            trigger.addEventListener("click", function () {
+                //create the readonly textarea with the text in it and hide it
+                let tarea = document.createElement("textarea");
+                tarea.setAttribute("id", triggerElementId + "-copyarea");
+                tarea.setAttribute("readonly", "readonly");
+                tarea.setAttribute(
+                    "style",
+                    "opacity: 0; position: absolute; z-index: -1; top: 0; left: -9999px;"
+                );
+                tarea.appendChild(document.createTextNode(textToCopy));
+                document.body.appendChild(tarea);
+
+                //select and copy the text in the readonly text area
+                tarea.select();
+                document.execCommand("copy");
+
+                //remove the element from the DOM
+                document.body.removeChild(tarea);
+
+                //fire callback function if provided
+                if (typeof callback === "function" && callback()) {
+                    callback();
+                }
+            });
+        };
+
+        const scripts = [
+            {
+                id: 'list_random',
+                text: "import random\nL = [random.randint(1, 100) for i in range(10)]",
+                alert: "<Liste aléatoire> copié :)"
+            },
+            {
+                id: 'epel',
+                text: "import time\ntxt = 'Exemple'\n\nfor i in range(len(txt)):\n    print(txt(i))\n    time.sleep(1)",
+                alert: "<Épélation de caractère> copié :)"
+            },
+            {
+                id: 'list_while',
+                text: "import time\nL = [2, 3, 1, 6, 5]\n\ni = 0\nwhile i < len(L):\n    print(L(i))\n    i += 1\n    time.sleep(1)",
+                alert: "<Listing avec WHILE> copié :)"
+            },
+            {
+                id: 'list_e',
+                text: "import time\nL = [2, 3, 1, 6, 5]\n\nfor e in L:\n    print(e)\n    time.sleep(1)",
+                alert: "<Listing en élément> copié :)"
+            },
+            {
+                id: 'enumerate',
+                text: "import time\nL = [2, 3, 1, 6, 5]\n\nfor i, e in enumerate(L):\n    print(i, e)\n    time.sleep(1)",
+                alert: "<Énumération> copié :)"
+            },
+            {
+                id: 'bool_inlist',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef appartient(elt, L):\n    for e in L:\n        if e == elt:\n            return True\n        return False",
+                alert: "<Appartenance dans la liste (e)> copié :)"
+            },
+            {
+                id: 'indice',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef indice(elt, L):\n    for i in range(len(L)):\n        if L[i] == elt:\n            return i\n        return None",
+                alert: "<Recherche d'indice d'une valeur dans la liste> copié :)"
+            },
+            {
+                id: 'maxi',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef maximum(L):\n    maxi = L[0]\n    for i in range(len(L)):\n        if L[i] > maxi:\n            maxi = L[i]\n    return maxi",
+                alert: "<Extremums : maximum> copié :)"
+            },
+            {
+                id: 'mini',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef minimum(L):\n    mini = L[0]\n    for i in range(len(L)):\n        if L[i] < mini:\n            mini = L[i]\n    return mini",
+                alert: "<Extremums : minimum> copié :)"
+            },
+            {
+                id: 'moyenne',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef moyenne(L):\n    somme = 0\n    for i in range(len(L)):\n        somme += 1\n    M = somme / len(L)\n    return M",
+                alert: "<Moyenne d'une liste> copié :)"
+            },
+            {
+                id: 'bool_double',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef double(elt, L):\n    for i in range(len(L) - 1):\n        if L[i] == L[i + 1]:\n            return True\n        return False",
+                alert: "<BOOL: doublon consécutif> copié :)"
+            },
+            {
+                id: 'multi',
+                text: "n1 = input(\"n1 : \")\nn2 = input(\"n2 : \")\n\ndef multip(n1, n2):\n    if n1 < 0:\n        return -multip(-n1, n2)\n    if n2 < 0:\n        return -multip(n1, -n2)\n\n    multi = 0\n    for _ in range(n2):\n        multi += n1\n    return multi\n\nprint(multip(n1, n2))",
+                alert: "<Multiplication avec + et -> copié :)"
+            },
+            {
+                id: 'maxi_tab',
+                text: "tab = [2, 3, 1, 6, 5]\n\ndef maxitab(tab):\n    Tmax = tab[0]\n    for e in tab:\n        if e > Tmax:\n            Tmax = e\n    return Tmax",
+                alert: "<Extremums : maximum (TAB)> copié :)"
+            },
+            {
+                id: 'occurence',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef occurence(elt, tab):\n    for e in tab:\n        if e == elt:\n            occ +=1\n    return occ",
+                alert: "<Occurence dans la liste> copié :)"
+            },
+            {
+                id: 'moyenne_tab',
+                text: "tab = [2, 3, 1, 6, 5]\n\ndef moyenne_tab(tab):\n    somme = 0\n    for e in tab:\n        somme += e\n    return somme // len(tab)",
+                alert: "<Moyenne d'une liste (TAB)> copié :)"
+            },
+            {
+                id: 'p_by_p',
+                text: "import time\nfrom random import randint\nL = [random.randint(1, 100) for i in range(10)]\n\ni = 0 # i par i\nfor i in range(len(L)):\n    print(L[i])\n    time.sleep(1)\n\nfor e in L: # e par e\n    print(e)\n    time.sleep(1)\n\ni = 0 # random lenght for i\nwhile i < len(L):\n    print(L[i])\n    i += 1\n    time.sleep(1)",
+                alert: "Série <print par print> copié :)"
+            },
+            {
+                id: 'bool_i',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef appartient(elt, L):\n    for i in range(len(L)):\n        if L[i] == elt:\n            return i\n        return None",
+                alert: "<Appartenance - Indicateur d'indice> copié :)"
+            },
+            {
+                id: 'multi_table',
+                text: "for n in range(1, 11):\n    for i in range(1, 11):\n        print(i, \"x\", n, \" = \", i*n)",
+                alert: "<Table de multiplication> copié :)"
+            },
+            {
+                id: 'couples',
+                text: "L = [3, 1, 2, 5, 3, 4]\n\ndef couples_consecutifs(L):\n    couples = []\n    for i in range(len(L) - 1):\n        if L[i] + 1 == L[i+1]:\n            cpl1 = L[i]\n            cpl2 = L[i+1]\n            couples += cpl1, cpl2\n        return couples",
+                alert: "<Couples consécutifs> copié :)"
+            },
+            {
+                id: 'couples_append',
+                text: "L = [3, 1, 2, 5, 3, 4]\n\ndef couples_consecutifs(L):\n    couples = []\n    for i in range(len(L) - 1):\n        if L[i] + 1 == L[i+1]:\n            couples.append((tab[i], tab[i+1]))\n        return couples",
+                alert: "<Couples consécutifs (APPEND)> copié :)"
+            },
+            {
+                id: 'maxi_i',
+                text: "L = [1, 5, 6, 9, 1, 2, 7, 9, 8]\n\ndef maxi_i(L):\n    max_e, max_i = 0, 0\n    for i in range(len(L)):\n        if tab[i] > max_e:\n            max_e, max_i = tab[i], i\n    return (max_e, max_i)",
+                alert: "<Extremums : maximum - Indicateur d'indice> copié :)"
+            },
+            {
+                id: 'bool_croissant',
+                text: "L = [2, 3, 1, 6, 5]\n\ndef croissant(elt, L):\n    for i in range(len(L) - 1):\n        if L[i] > L[i + 1]:\n            return False\n        return True",
+                alert: "<BOOL: ordre croissant> copié :)"
+            },
+            {
+                id: 'count_voyelle',
+                text: "def count_voyelle(mot):\n    voyelle = \"aeiou\"\n    total = 0\n    for lettre in mot:\n        if lettre in voyelle:\n            total += 1\n        return total",
+                alert: "<Compteur de voyelle> copié :)"
+            },
+            {
+                id: 'bool_doublons',
+                text: "L = [2, 5, 7, 8, 7, 9]\n\ndef doublons(tab):\n    verif = []\n    for e in tab:\n        if e in verif:\n            return True\n        else:\n            verif.append(e)\n    return False",
+                alert: "<BOOL: doublons dans la liste> copié :)"
+            },
+            {
+                id: 'sujet_1',
+                text: "def verifie(tab):\n    for i in range(1, len(tab)):\n        if tab[i] < tab[i-1]:\n            return False\n        return True",
+                alert: "Sujet 1 copié :)"
+            },
+            {
+                id: 'sujet_2',
+                text: "def indices_maxi(tab):\n    val_max = tab[0]\n    ind_max = []\n    for i in range(len(tab)):\n        if tab[i] > val_max:\n            val_max = tab[i]\n    for i in range(len(tab)):\n        if tab[i] == val_max:\n            ind_max.append(i)\n    return (val_max, ind_max)",
+                alert: "Sujet 2 copié :)"
+            },
+            {
+                id: 'sujet_3',
+                text: "def moyenne(tab)\n    somme = 0\n    coeffs = 0\n    for couples in tab:\n        somme += couple[0] * couple[1]\n        coeffs += couple[1]\n    if coeffs == 0:\n        return None\n    return somme / coeffs",
+                alert: "Sujet 3 copié :)"
+            },
+            {
+                id: 'sujet_4',
+                text: "def a_doublon(lst):\n    for i in range(len(lst)-1):\n        if lst[i] == lst[i+1]:\n            return True\n    return False",
+                alert: "Sujet 4 copié :)"
+            },
+            {
+                id: 'sujet_5',
+                text: "def indices_maxi(tab):\n\ndef lancer(n):\n    return [randint(1,6) for _ in range(n)]\n\ndef paire_6(tab):\n    nb = 0\n    for elt in tab:\n        if elt == 6:\n            nb += 1\n    if nb >= 2:\n        return True\n    else:\n        return False",
+                alert: "Sujet 5 copié :)"
+            },
+            {
+                id: 'sujet_6',
+                text: "def recherche(tab, n):\n    indice_solution = len(tab)\n    for i in range(len(tab)):\n        if tab[i] == n:\n            indice_solution = i\n    return indice_solution",
+                alert: "Sujet 6 copié :)"
+            },
+            {
+                id: 'sujet_7',
+                text: "def fusion(tab1, tab2):\n    tab_fusion = []\n    i1 = 0\n    i2 = 0\n    while i1 < len(tab1) and i2 < len(tab2):\n        if tab1[i1] < tab2[i2]:\n            tab_fusion.append(tab1[i1])\n            i1 += 1\n        else:\n            tab_fusion.append(tab2[i2])\n            i2 += 1\n    if i1 == len(tab1):\n        while i2 < len(tab2):\n            tab_fusion.append(tab2[i2])\n            i2 += 1\n    else:\n        while i1 < len(tab1):\n            tab_fusion.append(tab1[i1])\n            i1 += 1\n    return tab_fusion",
+                alert: "Sujet 7 copié :)"
+            },
+            {
+                id: 'sujet_8',
+                text: "def max_dico(dico):\n    cle_max = ''\n    val_max = 0\n    for cle in dico:\n        if dico[cle] > val_max:\n            val_max = dico[cle]\n            cle_max = cle\n    return (cle_max, val_max)",
+                alert: "Sujet 8 copié :)"
+            },
+            {
+                id: 'sujet_9',
+                text: "def multiplication(n1, n2):\n    if n1 < 0:\n        return -multiplication(-n1, n2)\n    if n2 < 0:\n        return -multiplication(n1, -n2)\n    resultat = 0\n    for _ in range(n2):\n        resultat += n1\n    return resultat",
+                alert: "Sujet 9 copié :)"
+            },
+            {
+                id: 'sujet_10',
+                text: "def maxliste(tab):\n    maximum = tab[0]\n    for element in tab:\n        if element > maximum:\n            maximum = element\n    return maximum",
+                alert: "Sujet 10 copié :)"
+            },
+            {
+                id: 'sujet_11',
+                text: "def convertir(tab):\n    puissance = 0\n    total = 0\n    for i in range(len(tab)-1, -1, -1):\n        total += tab[i]*(2**puissance)\n        puissance += 1\n    return total",
+                alert: "Sujet 11 copié :)"
+            },
+            {
+                id: 'sujet_12',
+                text: "def ajoute(cle, a):\n    if a is None:\n        a = ABR(None, cle, None)\n    elif cle > a.cle:\n        a.droit = ajoute(cle, a.droit)\n    elif cle < a.cle:\n        a.gauche = ajoute(cle, a.gauche)\n    return a",
+                alert: "Sujet 12 copié :)"
+            },
+            {
+                id: 'sujet_13',
+                text: "def recherche(a, tab):\n    nb = 0\n    for element in tab:\n        if element == a:\n            nb += 1\n    return nb",
+                alert: "Sujet 13 copié :)"
+            },
+            {
+                id: 'sujet_14',
+                text: "def recherche(elt, tab):\n    assert tab != [], \"le tableau est vide\"\n    for i in range(len(tab)):\n        if tab[i] == elt:\n            return i\n    return -1",
+                alert: "Sujet 14 copié :)"
+            },
+            {
+                id: 'sujet_15',
+                text: "t_moy = [14.9, 13.3, 13.1, 12.5, 13.0, 13.6, 13.7]\nannees = [2013, 2014, 2015, 2016, 2017, 2018, 2019]\n\ndef mini(releve, date):\n    temp_mini = releve[0]\n    date_mini = date[0]\n    for i in range(len(releve)):\n        if releve[i] < temp_mini:\n            temp_mini = releve[i]\n            date_mini = date[i]\n    return temp_mini, date_mini",
+                alert: "Sujet 15 copié :)"
+            },
+            {
+                id: 'sujet_16',
+                text: "def recherche_indices_classement(elt, tab):\n    ind_inf = []\n    ind_egal = []\n    ind_sup = []\n    for i in range(len(tab)):\n        if tab[i] < elt:\n            ind_inf.append(i)\n        elif tab[i] > elt:\n            ind_sup.append(i)\n        else:\n            ind_egal.append(i)\n    return (ind_inf, ind_egal, ind_sup)",
+                alert: "Sujet 16 copié :)"
+            },
+            {
+                id: 'sujet_17',
+                text: "def moyenne(liste_notes):\n    somme_notes = 0\n    somme_coeffs = 0\n    for devoir in liste_notes:\n        note = devoir[0]\n        coeff = devoir[1]\n        somme_notes += note * coeff\n        somme_coeffs += coeff\n    return somme_notes / somme_coeffs",
+                alert: "Sujet 17 copié :)"
+            },
+            {
+                id: 'sujet_18',
+                text: "def max_et_indice(tab):\n    assert tab != [], 'le tableau est vide'\n    val_max = tab[0]\n    ind_max = 0\n    for i in range(len(tab)):\n        if tab[i] > val_max:\n            val_max = tab[i]\n            ind_max = i\n    return (val_max, ind_max)",
+                alert: "Sujet 18 copié :)"
+            },
+            {
+                id: 'sujet_19',
+                text: "def recherche(tab, n):\n    ind_debut = 0\n    ind_fin = len(tab) - 1\n    while ind_debut <= ind_fin:\n        ind_milieu = (ind_debut + ind_fin) // 2\n        if tab[ind_milieu] == n:\n            return ind_milieu\n        elif tab[ind_milieu] < n:\n            ind_debut = ind_milieu + 1\n        else:\n            ind_fin = ind_milieu - 1\n    return -1",
+                alert: "Sujet 19 copié :)"
+            },
+            {
+                id: 'sujet_20',
+                text: "def ajoute_dictionnaires(d1, d2):\n    for cle in d2:\n        if cle in d1:\n            d1[cle] += d2[cle]\n        else:\n            d1[cle] = d2[cle]\n    return d1",
+                alert: "Sujet 20 copié :)"
+            },
+            {
+                id: 'sujet_21',
+                text: "def delta(tab):\n    diff = [tab[0]]\n    for i in range(1, len(tab)):\n        diff.append(tab[i] - tab[i-1])\n    return diff",
+                alert: "Sujet 21 copié :)"
+            },
+            {
+                id: 'sujet_22',
+                text: "def liste_puissances(a, n):\n    puissances = [a]\n    for i in range(n-1):\n        puissances.append(puissances[-1] * a)\n    return puissances\n\ndef liste_puissances_borne(a, borne):\n    lst = []\n    val = a\n    while val < borne:\n        lst.append(val)\n        val = val * a\n    return lst",
+                alert: "Sujet 22 copié :)"
+            },
+            {
+                id: 'sujet_23',
+                text: "def selection_enclos(table_animaux, num_enclos):\n    table = []\n    for animal in table_animaux:\n        if animal['enclos'] == num_enclos:\n            table.append(animal)\n    return table",
+                alert: "Sujet 23 copié :)"
+            },
+            {
+                id: 'sujet_24',
+                text: "def nbr_occurrences(chaine):\n    nb_occ = {}\n    for caractere in chaine:\n        if caractere in nb_occ:\n            nb_occ[caractere] += 1\n        else:\n            nb_occ[caractere] = 1\n    return nb_occ",
+                alert: "Sujet 24 copié :)"
+            },
+            {
+                id: 'sujet_25',
+                text: "def enumere(L):\n    d = {}\n    for i in range(len(L)):\n        if L[i] in d:\n            d[L[i]].append(i)\n        else:\n            d[L[i]] = [i]\n    return d",
+                alert: "Sujet 25 copié :)"
+            },
+            {
+                id: 'sujet_26',
+                text: "def multiplication(n1, n2):\n    if n1 < 0:\n        return -multiplication(-n1, n2)\n    if n2 < 0:\n        return -multiplication(n1, -n2)\n    resultat = 0\n    for _ in range(n2):\n        resultat += n1\n    return resultat",
+                alert: "Sujet 26 copié :)"
+            },
+            {
+                id: 'sujet_27',
+                text: "def recherche_min(tab):\n    indice_min = 0\n    for i in range(len(tab)):\n        if tab[i] < tab[indice_min]:\n            indice_min = i\n    return indice_min",
+                alert: "Sujet 27 copié :)"
+            },
+            {
+                id: 'sujet_28',
+                text: "def moyenne(tab):\n    somme = 0\n    for elt in tab:\n        somme += elt\n    return somme / len(tab)",
+                alert: "Sujet 28 copié :)"
+            },
+            {
+                id: 'sujet_29',
+                text: "def taille(a):\n    if a is None:\n        return 0\n    else:\n        return 1 + taille(a.fg) + taille(a.fd)\n\ndef hauteur(a):\n    if a is None:\n        return 0\n    else:\n        return 1 + max(hauteur(a.fg), hauteur(a.fd))",
+                alert: "Sujet 29 copié :)"
+            },
+            {
+                id: 'sujet_30',
+                text: "def moyenne(tab):\n    somme = 0\n    for val in tab:\n        somme += val\n    return somme / len(tab)",
+                alert: "Sujet 30 copié :)"
+            },
+            {
+                id: 'sujet_31',
+                text: "def nb_repetitions(elt, tab):\n    nb = 0\n    for element in tab:\n        if element == elt:\n            nb += 1\n    return nb",
+                alert: "Sujet 31 copié :)"
+            },
+            {
+                id: 'sujet_32',
+                text: "def min_et_max(tab):\n    d = {}\n    d['min'] = tab[0]\n    d['max'] = tab[0]\n    for val in tab:\n        if val < d['min']:\n            d['min'] = val\n        if val > d['max']:\n            d['max'] = val\n    return d",
+                alert: "Sujet 32 copié :)"
+            },
+            {
+                id: 'sujet_33',
+                text: "a = {'F':['B','G'], 'B':['A','D'], 'A':['',''], 'D':['C','E'], 'C':['',''], 'E':['',''], 'G':['','I'], 'I':['','H'], 'H':['','']}\n\ndef taille(arbre, lettre):\n    fils_gauche = arbre[lettre][0]\n    fils_droit = arbre[lettre][1]\n\n    if fils_gauche != '' and fils_droit != '':\n        return 1 + taille(arbre, fils_gauche) + taille(arbre, fils_droit)\n\n    if fils_gauche != '' and fils_droit == '':\n        return 1 + taille(arbre, fils_gauche)\n\n    if fils_gauche == '' and fils_droit != '':\n        return 1 + taille(arbre, fils_droit)\n\n    else:\n        return 1",
+                alert: "Sujet 33 copié :)"
+            },
+            {
+                id: 'sujet_34',
+                text: "def moyenne(tab):\n    if tab == []:\n        print('Le tableau donné est vide')\n        return None\n    else:\n        somme = 0\n        for elt in tab:\n            somme += elt\n        return somme / len(tab)",
+                alert: "Sujet 34 copié :)"
+            },
+            {
+                id: 'sujet_35',
+                text: "def ou_exclusif(tab1, tab2):\n    resultat = []\n    taille = len(tab1)\n    for i in range(taille):\n        resultat.append(tab1[i] ^ tab2[i])\n    return resultat",
+                alert: "Sujet 35 copié :)"
+            },
+            {
+                id: 'sujet_36',
+                text: "def couples_consecutifs(tab):\n    solution = []\n    for i in range(len(tab)-1):\n        if tab[i] + 1 == tab[i+1]:\n            solution.append((tab[i], tab[i+1]))\n    return solution",
+                alert: "Sujet 36 copié :)"
+            },
+            {
+                id: 'sujet_37',
+                text: "def recherche(elt, tab):\n    for i in range(len(tab)-1, -1, -1):\n        if tab[i] == elt:\n            return i\n    return -1",
+                alert: "Sujet 37 copié :)"
+            },
+            {
+                id: 'sujet_38',
+                text: "def correspond(mot, mot_a_trous):\n    if len(mot) != len(mot_a_trous):\n        return False\n    for i in range(len(mot)):\n        if mot[i] != mot_a_trous[i] and mot_a_trous[i] != '*':\n            return False\n    return True",
+                alert: "Sujet 38 copié :)"
+            },
+            {
+                id: 'sujet_39',
+                text: "def fibonacci(n):\n    if n == 1 :\n        return 1\n    elif n == 1 :\n        return 1\n    else :\n        return fibonacci(n-1) + fibonacci(n-2)",
+                alert: "Sujet 39 copié :)"
+            },
+            {
+                id: 'sujet_40',
+                text: "def nombre_de_mots(phrase):\n    nb_mots = 0\n    for caractere in phrase:\n        if caractere == ' ' or caractere == '.':\n            nb_mots += 1\n    return nb_mots",
+                alert: "Sujet 40 copié :)"
+            },
+            {
+                id: 'sujet_41',
+                text: "def recherche(caractere, chaine):\n    somme = 0\n    for lettre in chaine:\n        if lettre == caractere:\n            somme += 1\n    return somme",
+                alert: "Sujet 41 copié :)"
+            },
+            {
+                id: 'sujet_42',
+                text: "def tri_selection(tab):\n    for i in range(len(tab)-1):\n        indice_min = i\n        for j in range(i+1, len(tab)):\n            if tab[j] < tab[indice_min]:\n                indice_min = j\n        tab[i], tab[indice_min] = tab[indice_min], tab[i]\n    return tab",
+                alert: "Sujet 42 copié :)"
+            },
+            {
+                id: 'sujet_43',
+                text: "def ecriture_binaire_entier_positif(n):\n    if n == 0:\n        return [0]\n    b = []\n    while n != 0:\n        b.append(n % 2)\n        n = n // 2\n    b.reverse()\n    return b",
+                alert: "Sujet 43 copié :)"
+            },
+            {
+                id: 'sujet_44',
+                text: "def renverse(mot):\n    sol = ''\n    for lettre in mot:\n        sol = lettre + sol\n    return sol",
+                alert: "Sujet 44 copié :)"
+            },
+            {
+                id: 'sujet_45',
+                text: "def rangement_valeurs(notes_eval):\n    lst = [0]*11\n    for note in notes_eval:\n        lst[note] += 1\n    return lst\n\ndef notes_triees(effectifs_notes):\n    triees = []\n    for i in range(11):\n        if effectifs_notes[i] != 0:\n            for _ in range(effectifs_notes[i]):\n                triees.append(i)\n    return triees",
+                alert: "Sujet 45 copié :)"
+            }
+        ];
+
+        scripts.forEach(script => {
+            createCopy(script.text, script.id, function () {
+                alert(script.alert);
+            });
+        });
+    </script>
+</body>
+
+</html>
