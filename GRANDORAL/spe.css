@@ -1,0 +1,22 @@
+#arts::before {background-image: url('img/spécialités/GEN\ arts.jpg'); background-position: bottom}
+#eps::before {background-image: url('img/spécialités/GEN\ EPS.png')}
+#geopo::before {background-image: url('img/spécialités/GEN\ geopo.gif')}
+#human::before {background-image: url('img/spécialités/GEN\ humanite.gif'); background-position: 0 20%}
+#lang_ant::before {background-image: url('img/spécialités/GEN\ langAntiq.jpeg'); background-position: top}
+#lang::before {background-image: url('img/spécialités/GEN\ langues.png')}
+#maths::before {background-image: url('img/spécialités/GEN\ maths.webp')}
+#nsi::before {background-image: url('img/spécialités/GEN\ NSI.jpg')}
+#phys::before {background-image: url('img/spécialités/GEN\ physchim.png')}
+#ses::before {background-image: url('img/spécialités/GEN\ SES.jpg')}
+#svt::before {background-image: url('img/spécialités/GEN\ SVT.jpeg')}
+#inge::before {background-image: url('img/spécialités/GEN\ zInge.jpeg')}
+#bio::before {background-image: url('img/spécialités/GEN\ bio.jpg')}
+
+#stmg::before {background-image: url('img/spécialités/STMG.webp')}
+#sti2d::before {background-image: url('img/spécialités/Sti')}
+#std2a::before {background-image: url('img/spécialités/STD2A\ concept.jpg')}
+#stl::before {background-image: url('img/spécialités/STL\ bio.png')}
+#st2s::before {background-image: url('img/spécialités/ST2S\ biopsycho.jpg')}
+#s2tmd::before {background-image: url('img/spécialités/S2TMD\ culturesciences.jpg')}
+#sthr::before {background-image: url('img/spécialités/STHR\ hotelerie.gif')}
+#stav::before {background-image: url('img/spécialités/STav')}

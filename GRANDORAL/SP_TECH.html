@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <header>
+    <header class="sp">
         <!-- NAVIGATION https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp -->
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -21,13 +21,21 @@
         <button class="openbtn" onclick="openNav()">
             <a>&#9776</a>
         </button>
+        <img src="img/titreHB.png" height="40px">
     </header>
-    <main class="Accueil">
-        <div>
-            <h1><img src="img/titreHB.png" width="700px"></h1>
-            <!-- https://www.geeksforgeeks.org/search-bar-using-html-css-and-javascript/ -->
-            <input id="searchbar" onkeyup="search_animal()" type="text" name="search" placeholder="Si ton sujet ne serait pas déjà ici...">
-        </div>        
+    <main class="Filière">
+        <h1>Technologique - Séries</h1>
+        <h2>Les 8 séries du Baccalauréat en filière technologique, jusqu'à présent..</h2>
+        <div id="container" class="galerie">
+            <div class="spe" id="stmg"><h1>STMG</h1></div>
+            <div class="spe" id="sti2d"><h1>STI2D</h1></div>
+            <div class="spe" id="std2a"><h1>STD2A</h1></div>
+            <div class="spe" id="stl"><h1>STL</h1></div>
+            <div class="spe" id="st2s"><h1>ST2S</h1></div>
+            <div class="spe" id="s2tmd"><h1>S2TMD</h1></div>
+            <div class="spe" id="sthr"><h1>STHR</h1></div>
+            <div class="spe" id="stav"><h1>STAV</h1></div>
+        </div>
     </main><script src="js/sidebar.js"></script>
 </body>
 

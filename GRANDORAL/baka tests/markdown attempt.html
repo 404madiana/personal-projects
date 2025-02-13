@@ -1,0 +1,114 @@
+<!--merci chatgpt muehehewh-->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Markdown Renderer</title>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #markdown-content {
+            background-color: #f6f8fa;
+            padding: 20px;
+            border-radius: 6px;
+            border: 1px solid #d0d7de;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #0366d6;
+        }
+        pre {
+            background-color: #f6f8fa;
+            padding: 10px;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #d0d7de;
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Markdown Renderer</h1>
+    <div id="markdown-content"></div>
+
+    <script>
+        // Exemple de contenu Markdown simulant la base de données
+        const markdownText = `
+# Projet GRAND ORAL
+un projet qui marche comme un moteur de recherche pour les sujet d'oraux
+
+## Accueil
+Interface similaire à celui de Google, Bing ou n'importe moteur
+
+## Page de sujet
+Affiche les plans en rendu markdown, avec les auteurs et leur note attribué
+
+## Spécialités
+3 filières avec leur propres spécialités
+`;
+
+        // Fonction pour rendre le contenu Markdown
+        function renderMarkdown(text) {
+            const markdownContainer = document.getElementById('markdown-content');
+            markdownContainer.innerHTML = marked(text);
+        }
+
+        // Simuler une "table de données" dynamique
+        function fetchSubjectData(subjectId) {
+            const mockDatabase = { // A REMPLACER PAR FETCH pr le DB
+                "subject1": {
+                    "title": "Plan de sujet : La démocratie",
+                    "author": "Jean Dupont",
+                    "note": "4.5/5",
+                    "content": `
+# La démocratie
+1. Définition et principes fondamentaux
+2. Les défis actuels de la démocratie
+3. Exemples pratiques
+
+_Auteur : Jean Dupont_
+_Note attribuée : 4.5/5_
+                    `
+                },
+                "subject2": {
+                    "title": "Plan de sujet : L'intelligence artificielle",
+                    "author": "Alice Martin",
+                    "note": "5/5",
+                    "content": `
+# L'intelligence artificielle
+1. Historique et définition
+2. Applications modernes
+3. Débats éthiques et limites
+
+_Auteur : Alice Martin_
+_Note attribuée : 5/5_
+                    `
+                }
+            };
+            return mockDatabase[subjectId];
+        }
+
+        // Exemple d'utilisation pour un sujet spécifique
+        const subjectId = "subject1"; // Simuler un choix utilisateur
+        const subjectData = fetchSubjectData(subjectId);
+        if (subjectData) {
+            renderMarkdown(subjectData.content);
+        } else {
+            renderMarkdown(markdownText); // Contenu par défaut
+        }
+    </script>
+</body>
+</html>

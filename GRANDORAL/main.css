@@ -1,8 +1,5 @@
 html {
-    height: 100%;
-    /* Full height */
-    /* Center and scale the image nicely */
-    
+    height: 100%; /* Full height */
     overflow: hidden; /* Disable horizontal scroll */
 }
 body {
@@ -10,13 +7,13 @@ body {
     margin: -2px;
     width: 100%;
     height: 110%;
-    background-color: white;
     color: black;
+    background-color: #fff;
     font-family: "HYWenHei 85W", "Century Gothic", "Avenir", sans-serif;
-    transition: .5s;
+    transition: background-color .5s;
     background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
+    /*background-image: url('cafard.gif')*/
 }
 
 header {
@@ -24,7 +21,6 @@ header {
     margin: -10px;
     border-bottom: 1px solid #222;
 }
-
 
 /** https://www.w3schools.com/howto/howto_js_collapse_sidebar.asp **/
 .sidebar { /* The sidebar menu */
@@ -91,12 +87,74 @@ header {
     }
 }
 
-
-/* Accueil*/
-.Accueil {
+.Accueil { /* MAIN Accueil*/
     display: block;
     margin: 140px auto;
     text-align: center;
+}
+
+/* SPÉCIALITÉS*/
+.Filière { /* MAIN Spécialités*/
+    display: block;
+    margin: 100px;
+    h1 { text-align: left; font-size: 80px; margin-bottom: -10px }
+    
+    #container {
+        width: 100%;
+        height: auto;
+        gap: 20px;
+    }
+    .galerie {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: masonry;
+        
+        .spe {
+            position: relative;
+            transition: transform .3s, color .5s;
+            height: 210px;
+            padding-top: 10%;
+            color: black;
+            h1 { text-align: center; font-size: 60px }
+        }
+        .spe:hover { transform: scale(1.1); color: wheat }
+        .spe::before {
+            content: '';
+            display: block;
+            position: absolute;
+            z-index: -1;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background-size: cover; background-position: center;
+            opacity: 0.5;
+            transition: opacity .5s
+        }.spe:hover::before { opacity: 1 }
+        /* Générale - Spécialités */
+        #arts::before {background-image: url('img/spécialités/GEN\ arts.jpg'); background-position: bottom}
+        #eps::before {background-image: url('img/spécialités/GEN\ EPS.png')}
+        #geopo::before {background-image: url('img/spécialités/GEN\ geopo.gif')}
+        #human::before {background-image: url('img/spécialités/GEN\ humanite.gif'); background-position: 0 20%}
+        #lang_ant::before {background-image: url('img/spécialités/GEN\ langAntiq.jpeg'); background-position: top}
+        #lang::before {background-image: url('img/spécialités/GEN\ langues.png')}
+        #maths::before {background-image: url('img/spécialités/GEN\ maths.webp')}
+        #nsi::before {background-image: url('img/spécialités/GEN\ NSI.jpg')}
+        #phys::before {background-image: url('img/spécialités/GEN\ physchim.png')}
+        #ses::before {background-image: url('img/spécialités/GEN\ SES.jpg')}
+        #svt::before {background-image: url('img/spécialités/GEN\ SVT.jpeg')}
+        #inge::before {background-image: url('img/spécialités/GEN\ zInge.jpeg')}
+        #bio::before {background-image: url('img/spécialités/GEN\ bio.jpg')}
+        /* Technologique - Séries */
+        #stmg::before {background-image: url('img/spécialités/STMG.webp')}
+        #sti2d::before {background-image: url('img/spécialités/Sti')}
+        #std2a::before {background-image: url('img/spécialités/STD2A\ concept.jpg')}
+        #stl::before {background-image: url('img/spécialités/STL\ bio.png')}
+        #st2s::before {background-image: url('img/spécialités/ST2S\ biopsycho.jpg')}
+        #s2tmd::before {background-image: url('img/spécialités/S2TMD\ culturesciences.jpg')}
+        #sthr::before {background-image: url('img/spécialités/STHR\ hotelerie.gif')}
+        #stav::before {background-image: url('img/spécialités/STMG.webp')}
+    }
 }
 
 #searchbar {
@@ -111,25 +169,4 @@ header {
     ::placeholder {
         opacity: 0.6;
     }
-}
-
-/* SPs*/
-header .sp {
-    display: flex;
-    flex-direction: column;
-}
-
-/* Zoom pour les SPs */
-.zoom {
-    padding: 40px;
-    transition: transform .1s;
-    /* Animation */
-    width: 50%;
-    height: 50%;
-    margin: 0 auto;
-}
-
-.zoom:hover {
-    transform: scale(1.2);
-    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
 }
